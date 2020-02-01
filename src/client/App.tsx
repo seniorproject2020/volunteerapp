@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Register from './components/Register/Register';
 
 class App extends React.Component<AppProps, AppState> {
 	constructor(props: AppProps) {
@@ -10,8 +11,8 @@ class App extends React.Component<AppProps, AppState> {
 
 	async componentDidMount() {
 		try {
-			let r = await fetch('/api/hello');
-			let name = await r.json();
+			const r = await fetch('/api/hello');
+			const name = await r.json();
 			this.setState({ name });
 		} catch (error) {
 			console.log(error);
@@ -22,6 +23,7 @@ class App extends React.Component<AppProps, AppState> {
 		return (
 			<main className="container my-5">
 				<h1 className="text-primary text-center">Hello {this.state.name}!</h1>
+				<Register/>
 			</main>
 		);
 	}
