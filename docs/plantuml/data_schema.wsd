@@ -1,0 +1,24 @@
+@startuml
+class User {
+  isAdmin: boolean
+  email: string
+  password: string
+  phone: string
+  total_logged_hours: number
+  logged_hours: Array<LoggedHour: string>
+}
+
+class LoggedHour {
+  start_time: date
+  end_time: date
+  verified: boolean
+  userId: string
+}
+
+class Todo{
+  hours_pending_verification: Array<LoggedHour:string>
+  
+}
+
+
+@enduml

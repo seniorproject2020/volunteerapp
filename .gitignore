@@ -33,6 +33,8 @@ coverage/
 # Misc
 node_modules/
 dist/
+out/docs
+public/js
 
 # Redis data
 backend/redis-data/*
