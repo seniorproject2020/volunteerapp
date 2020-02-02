@@ -1,7 +1,9 @@
-import mongoose, {Schema, Document} from 'mongoose';
+import * as mongoose from 'mongoose';
 import {Hours} from './hours.schema'
 
-export interface User extends Document {
+export interface User extends mongoose.Document {
+    first_name: string,
+    last_name: string,
     email: string;
     password: string;
     isAdmin: boolean;
@@ -10,7 +12,9 @@ export interface User extends Document {
     logged_hours: Array<Hours['_id']>;
 }
 
-const UserSchema: Schema = new Schema({
+const UserSchema: mongoose.Schema = new mongoose.Schema({
+    first_name: {type: String},
+    last_name: {type: String},
     isAdmin: {type: Boolean, required: true},
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true},
@@ -19,5 +23,7 @@ const UserSchema: Schema = new Schema({
     logged_hours: [String]
 });
 
-//exports model and returns documents of type User
-export default mongoose.model<User>('User', UserSchema);
+const u : mongoose.Model<User> = mongoose.model('User', UserSchema);
+
+export default u;
+

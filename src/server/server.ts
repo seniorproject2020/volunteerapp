@@ -1,6 +1,8 @@
-import * as express from 'express';
-import * as mongoose from 'mongoose';
-import * as bodyParser from 'body-parser';
+import express from 'express';
+import mongoose from 'mongoose';
+import bodyParser from 'body-parser';
+import passport from 'passport';
+import passportJwt from './auth/passport'
 import apiRouter from './routes';
 require('dotenv').config();
 
@@ -22,6 +24,9 @@ mongoose
   )
   .then(() => console.log("MongoDB successfully connected"))
   .catch(err => console.log(err));
+  
+app.use(passport.initialize());
+passportJwt(passport);
 
 app.use(express.static('public'));
 app.use(apiRouter);
