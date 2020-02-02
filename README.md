@@ -21,11 +21,19 @@ Within the project root
 yarn
 ```
 
+```bash
+npm install
+```
+
 
 ## Usage
 
 ```bash
 yarn dev
+```
+
+```bash
+npm run dev
 ```
 
 ## Running the tests
