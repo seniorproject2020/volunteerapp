@@ -1,7 +1,7 @@
 import {Strategy, ExtractJwt} from 'passport-jwt';
 import User from '../models/users.schema';
 
-let opts = {};
+const opts = {};
 
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = 'secret';

@@ -1,36 +1,24 @@
-import * as React from 'react';
+import React, { Component } from 'react';
+import { BrowserRouter, Route } from "react-router-dom";
 
-class App extends React.Component<AppProps, AppState> {
-	constructor(props: AppProps) {
-		super(props);
-		this.state = {
-			name: null
-		};
-	}
+import Navbar from "./components/layout/Navbar";
+import Landing from "./components/layout/Landing";
+import Register from "./components/auth/Register";
+import Login from "./components/auth/Login"
 
-	async componentDidMount() {
-		try {
-			let r = await fetch('/api/hello');
-			let name = await r.json();
-			this.setState({ name });
-		} catch (error) {
-			console.log(error);
-		}
-	}
-
+class App extends React.Component{
 	render() {
-		return (
-			<main className="container my-5">
-				<h1 className="text-primary text-center">Hello {this.state.name}!</h1>
-			</main>
-		);
-	}
-}
-
-export interface AppProps {}
-
-export interface AppState {
-	name: string;
+    return (
+      <BrowserRouter>
+        <div className="container">
+          <Navbar />
+          <Route exact path="/" component={Landing} />
+          <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
+        </div>
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;

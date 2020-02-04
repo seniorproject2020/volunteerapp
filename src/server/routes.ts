@@ -5,10 +5,10 @@ import { userInfo } from 'os';
 const router = express.Router();
 
 router.get('/api/hello', (req, res, next) => {
-    res.json('h');
+    res.json('Henry');
 });
 
-router.post('/register', async (req, res) => {
+router.post('/api/register', async (req, res) => {
     const result = await UserController.registerUser(req.body.email, req.body.password);
     if(result.success){
         return res.json(result);
@@ -17,7 +17,7 @@ router.post('/register', async (req, res) => {
     }
 });
 
-router.post('/login', async (req, res) => {
+router.post('/api/login', async (req, res) => {
     const result = await UserController.loginUser(req.body.email, req.body.password);
     if(result.success){
         res.json(result);
@@ -26,7 +26,7 @@ router.post('/login', async (req, res) => {
     }
 })
 
-router.get('/currentUser', (req, res) => {
+router.get('/api/currentUser', (req, res) => {
     if(req.user){
         res.json(req.user);
     } else {
