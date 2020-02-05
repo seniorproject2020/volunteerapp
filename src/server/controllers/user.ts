@@ -1,6 +1,8 @@
 import User from '../models/users.schema';
 import * as jwt from 'jsonwebtoken';
 
+// TODO: Format schema and userInfo to be camelcase
+
 const UserController = {
   async registerUser(email: string, password: string): Promise<{success: boolean, user: any, err: any}> {
     const user = await User.findOne({email});
@@ -37,7 +39,7 @@ const UserController = {
     user.password = null;
 
     const payload = {
-      user: JSON.stringify(user),
+      user: user,
     }
 
     const token = jwt.sign(payload, process.env.secretOrKey,

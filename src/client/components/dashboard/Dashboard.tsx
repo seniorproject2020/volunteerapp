@@ -9,17 +9,20 @@ class Dashboard extends Component {
     this.props.logoutUser();
   };
 
-/* TODO: Return user in a usable format to display. 
-It currently needs to be parsed with JSON.parse().
-The structure is also nested within auth.user.user which is not very friendly.
-*/
 render() {
   const { user } = (this.props.auth.user);
-  console.log(JSON.parse(user))
+  console.log(this.props)
     return (
       <div>
         <div>
           Dashboard Page
+          <ul>
+            <li>Name: { user.first_name } { user.last_name }</li>
+            <li>Email: { user.email }</li>
+            <li>Phone: { user.phone }</li>
+            <li>Total Logged Hours: { user.total_logged_hours }</li>
+            <li>Admin: { user.isAdmin ? "True" : "False" }</li>
+          </ul>
         </div>
         <div>
           <button

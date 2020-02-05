@@ -35,7 +35,6 @@ export const logoutUser = () => dispatch => {
 
 // Register User
 export const registerUser = (userData, history) => dispatch => {
-  console.log("registerUser")
   axios
     .post("/api/register", userData)
     .then(res => history.push("/login")) // re-direct to login on successful register
@@ -49,8 +48,6 @@ export const registerUser = (userData, history) => dispatch => {
 
 // Login - get user token
 export const loginUser = userData => dispatch => {
-  console.log("loginUser")
-  console.log(userData);
   axios
     .post("/api/login", userData)
     .then(res => {
