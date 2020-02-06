@@ -16,10 +16,10 @@ const UserController = {
       password: password,
       isAdmin: false,
       phone: '',
-      first_name:'',
-      last_name:'',
-      total_logged_hours: 0,
-      logged_hours: [],
+      firstName:'',
+      lastName:'',
+      totalLoggedHours: 0,
+      loggedHours: [],
     }
     const newUser = new User(userInfo);
     const resUser = await newUser.save();
@@ -36,8 +36,6 @@ const UserController = {
       return {success: false, token:'', err: undefined};
     }
 
-    user.password = null;
-
     const payload = {
       user: user,
     }
@@ -50,7 +48,7 @@ const UserController = {
 
     return {
       success: true,
-      token: "Bearer " + token,
+      token: "JWT " + token,
       err: undefined
     }
   }

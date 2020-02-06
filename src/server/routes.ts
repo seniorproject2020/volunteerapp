@@ -1,6 +1,6 @@
 import * as express from 'express';
 import UserController from './controllers/user';
-import { userInfo } from 'os';
+import passport from 'passport';
 
 const router = express.Router();
 
@@ -26,7 +26,7 @@ router.post('/api/login', async (req, res) => {
     }
 })
 
-router.get('/api/currentUser', (req, res) => {
+router.get('/api/me', passport.authenticate("jwt", { session: false }), (req, res) => {
     if(req.user){
         res.json(req.user);
     } else {
