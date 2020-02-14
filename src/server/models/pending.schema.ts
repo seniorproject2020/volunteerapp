@@ -8,8 +8,8 @@ export interface Pending extends Document {
 }
 
 const PendingSchema: Schema = new Schema({
-    hours_pending_verification: [Schema.Types.ObjectId], 
-    verified_by: {type: Schema.Types.ObjectId, required: true}
+    hoursPendingVerification: [{type: Schema.Types.ObjectId, required: true}], 
+    verifiedBy: {type: Schema.Types.ObjectId}
 });
 
-export default mongoose.model<Pending>('Pending', PendingSchema);
+export default mongoose.model<Pending>('Pending', PendingSchema, 'pending-verification');

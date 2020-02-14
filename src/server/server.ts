@@ -16,11 +16,14 @@ app.use(
 );
 app.use(bodyParser.json());
 
+console.log(process.env.MONGO_URI);
 const db: string = process.env.MONGO_URI;
+
+mongoose.set('useUnifiedTopology', true);
 mongoose
   .connect(
     db,
-    { useNewUrlParser: true }
+    { useNewUrlParser: true }, 
   )
   .then(() => console.log("MongoDB successfully connected"))
   .catch(err => console.log(err));

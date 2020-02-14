@@ -14,10 +14,10 @@ const UserController = {
       password: password,
       isAdmin: false,
       phone: '',
-      first_name:'',
-      last_name:'',
-      total_logged_hours: 0,
-      logged_hours: [],
+      firstName:'',
+      lastName:'',
+      totalLoggedHours: 0,
+      loggedHours: [],
     }
     const newUser = new User(userInfo);
     const resUser = await newUser.save();
@@ -37,7 +37,7 @@ const UserController = {
     user.password = null;
 
     const payload = {
-      user: JSON.stringify(user),
+      user:user,
     }
 
     const token = jwt.sign(payload, process.env.secretOrKey,
@@ -48,7 +48,7 @@ const UserController = {
 
     return {
       success: true,
-      token: "Bearer " + token,
+      token: "JWT " + token,
       err: undefined
     }
   }

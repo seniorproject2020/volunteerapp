@@ -1,16 +1,17 @@
 import {Strategy, ExtractJwt} from 'passport-jwt';
+import jwt from 'passport-jwt';
 import User from '../models/users.schema';
 
-let opts = {};
-
-opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-opts.secretOrKey = 'secret';
+const opts = {
+  jwtFromRequest: jwt.ExtractJwt.fromAuthHeaderWithScheme("JWT"),
+  secretOrKey: 'secret',
+};
 
 const init = passport => {
-  console.log(JSON.stringify(opts));
+  console.log('Opts: ' + JSON.stringify(opts.jwtFromRequest));
   passport.use(
     new Strategy(opts, (jwtPayload, done) => {
-      User.findById(jwtPayload.id)
+      User.findById(jwtPayload.user._id)
         .then(user => {
           if (user) {
             return done(null, user);

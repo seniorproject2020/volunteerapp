@@ -13,17 +13,17 @@ export interface User extends mongoose.Document {
 }
 
 const UserSchema: mongoose.Schema = new mongoose.Schema({
-    first_name: {type: String},
-    last_name: {type: String},
+    firstName: {type: String},
+    lastName: {type: String},
     isAdmin: {type: Boolean, required: true},
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true},
     phone: {type: String},
-    total_logged_hours: {type: Number},
-    logged_hours: [String]
+    totalLoggedHours: {type: Number},
+    loggedHours: [String]
 });
 
-const u : mongoose.Model<User> = mongoose.model('User', UserSchema);
+const u : mongoose.Model<User> = mongoose.model('User', UserSchema, 'users');
 
 export default u;
 
