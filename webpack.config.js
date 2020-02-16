@@ -55,7 +55,7 @@ const clientConfig = {
       ]
     },
     resolve: {
-        extensions: ['.tsx', '.ts', '.js', '.css', '.scss']
+        extensions: ['.tsx', '.ts', '.js', '.css']
     },
     output: {
         filename: 'app.js',
