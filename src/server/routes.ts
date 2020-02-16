@@ -1,6 +1,5 @@
 import * as express from 'express';
 import UserController from './controllers/user';
-import { userInfo } from 'os';
 import HoursController from './controllers/hours';
 import passport from 'passport';
 
