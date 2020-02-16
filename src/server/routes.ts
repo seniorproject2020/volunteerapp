@@ -7,10 +7,10 @@ import passport from 'passport';
 const router = express.Router();
 
 router.get('/api/hello', (req, res, next) => {
-    res.json('h');
+    res.json('Henry');
 });
 
-router.post('/register', async (req, res) => {
+router.post('/api/register', async (req, res) => {
     const result = await UserController.registerUser(req.body.email, req.body.password);
     if(result.success){
         return res.json(result);
@@ -19,7 +19,7 @@ router.post('/register', async (req, res) => {
     }
 });
 
-router.post('/login', async (req, res) => {
+router.post('/api/login', async (req, res) => {
     const result = await UserController.loginUser(req.body.email, req.body.password);
     if(result.success){
         res.json(result);
@@ -28,6 +28,7 @@ router.post('/login', async (req, res) => {
     }
 })
 
+<<<<<<< HEAD
 router.post('/loghours', passport.authenticate('jwt', {session: false}), async (req, res) => {
     console.log(req.user);
     const result = await HoursController.logHours(req.user, req.body.startDate, req.body.endDate);
@@ -39,6 +40,9 @@ router.post('/loghours', passport.authenticate('jwt', {session: false}), async (
 })
 
 router.get('/currentUser', (req, res) => {
+=======
+router.get('/api/me', passport.authenticate("jwt", { session: false }), (req, res) => {
+>>>>>>> master
     if(req.user){
         res.json(req.user);
     } else {

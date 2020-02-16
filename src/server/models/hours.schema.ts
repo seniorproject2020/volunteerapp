@@ -2,9 +2,9 @@ import mongoose, {Schema, Document} from 'mongoose';
 import {User} from './users.schema'
 
 export interface Hours extends Document {
-    user_id: User['_id'];
-    start_time: Date;
-    end_time: Date;
+    userId: User['_id'];
+    startTime: Date;
+    endTime: Date;
     verified: boolean;
 }
 

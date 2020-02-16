@@ -2,14 +2,14 @@ import * as mongoose from 'mongoose';
 import {Hours} from './hours.schema'
 
 export interface User extends mongoose.Document {
-    first_name: string,
-    last_name: string,
+    firstName: string,
+    lastName: string,
     email: string;
     password: string;
     isAdmin: boolean;
     phone: string;
-    total_logged_hours: number;
-    logged_hours: Array<Hours['_id']>;
+    totalLoggedHours: number;
+    loggedHours: Array<Hours['_id']>;
 }
 
 const UserSchema: mongoose.Schema = new mongoose.Schema({
