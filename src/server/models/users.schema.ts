@@ -23,7 +23,7 @@ const UserSchema: mongoose.Schema = new mongoose.Schema({
     loggedHours: [String]
 });
 
-const u : mongoose.Model<User> = mongoose.model('User', UserSchema);
+const u : mongoose.Model<User> = mongoose.model('User', UserSchema, 'users');
 
 export default u;
 

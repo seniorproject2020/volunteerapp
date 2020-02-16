@@ -12,7 +12,8 @@ const HoursSchema: Schema = new Schema({
     userId: {type: Schema.Types.ObjectId, required: true},
     startTime: {type: Date, required: true},
     endTime: {type: Date, required: true},
+    totalHours: {type: Number, required: true},
     verified: {type: Boolean, required: true}
 });
 
-export default mongoose.model<Hours>('Hours', HoursSchema);
+export default mongoose.model<Hours>('Hours', HoursSchema, 'hours');

@@ -12,4 +12,4 @@ const PendingSchema: Schema = new Schema({
     verifiedBy: {type: Schema.Types.ObjectId, required: true}
 });
 
-export default mongoose.model<Pending>('Pending', PendingSchema);
+export default mongoose.model<Pending>('Pending', PendingSchema, 'pending-verification');
