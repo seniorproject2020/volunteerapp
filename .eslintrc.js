@@ -9,5 +9,11 @@ module.exports = {
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
     'prettier/@typescript-eslint',
+    'plugin:react/recommended',
   ],
+  settings: {
+    react: {
+      version: "detect" // Tells eslint-plugin-react to automatically detect the version of React to use
+    }
+  }
 };
