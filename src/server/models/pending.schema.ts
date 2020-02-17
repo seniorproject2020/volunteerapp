@@ -1,15 +1,12 @@
 import mongoose, {Schema, Document} from 'mongoose';
-import {User} from './users.schema'
 import {Hours} from './hours.schema'
 
-export interface Pending extends Document {
-    verifiedBy: User['_id'];
-    hoursPendingVerification: Array<Hours['_id']>;
+export interface PendingHourSchema extends Document {
+    hour: Hours['_id'], 
 }
 
-const PendingSchema: Schema = new Schema({
-    verifiedBy: {type: Schema.Types.ObjectId, required: true}
-    hoursPendingVerification: [{type: Schema.Types.ObjectId, required: true}], 
+const PendingHourSchema: Schema = new Schema({
+    hour: [{type: Schema.Types.ObjectId, required: true}], 
 });
 
-export default mongoose.model<Pending>('Pending', PendingSchema, 'pending-verification');
+export default mongoose.model<PendingHourSchema>('PendingHour', PendingHourSchema, 'PendingHours');

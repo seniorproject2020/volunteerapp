@@ -36,7 +36,7 @@ export const logoutUser = () => dispatch => {
 // Register User
 export const registerUser = (userData, history) => dispatch => {
   axios
-    .post("/api/register", userData)
+    .post("/api/user/register", userData)
     .then(res => history.push("/login")) // re-direct to login on successful register
     .catch(err =>
       dispatch({
@@ -49,7 +49,7 @@ export const registerUser = (userData, history) => dispatch => {
 // Login - get user token
 export const loginUser = userData => dispatch => {
   axios
-    .post("/api/login", userData)
+    .post("/api/user/login", userData)
     .then(res => {
       // Save to localStorage
       // Set token to localStorage

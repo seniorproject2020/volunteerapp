@@ -5,8 +5,6 @@ import Pending from '../models/pending.schema'
 
 const HoursController = {
   async logHours(user: any, startDate: Date, endDate: Date):Promise<{success: boolean, res: any, err: any}> {
-    console.log(user);
-
     if (!user) {
       return {success: false, res: undefined, err: {
         user: 'user not found',

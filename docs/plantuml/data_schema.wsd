@@ -4,20 +4,23 @@ class User {
   email: string
   password: string
   phone: string
-  total_logged_hours: number
-  logged_hours: Array<LoggedHour: string>
+  totalHoursApproved: number
+  approvedHours: Array<LoggedHour._id::string>
+  pendingHours: Array<LoggedHour._id::string>
 }
 
-class LoggedHour {
+class Hour {
   start_time: date
   end_time: date
   verified: boolean
-  userId: string
+  verifiedBy: User._id::string
+  userId: User._id::string
+  eventName: string
+  eventDescription: string
 }
 
-class Todo{
-  hours_pending_verification: Array<LoggedHour:string>
-  
+class PendingHours{
+  hour: Hours::ObjectId
 }
 
 

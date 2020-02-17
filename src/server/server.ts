@@ -3,8 +3,7 @@ import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import passport from 'passport';
 import passportJwt from './auth/passport'
-import apiRouter from './routes';
-import session from 'express-session';
+import routes from './routes/routes';
 require('dotenv').config();
 
 
@@ -16,12 +15,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(passport.initialize());
 passportJwt(passport);
-app.use(apiRouter);
+app.use('/api', routes);
 
-console.log(process.env.MONGO_URI);
 const db: string = process.env.MONGO_URI;
-
-mongoose.set('useUnifiedTopology', true);
+//mongoose.set('useUnifiedTopology', true);
 mongoose
   .connect(
     db,
