@@ -18,7 +18,6 @@ passportJwt(passport);
 app.use('/api', routes);
 
 const db: string = process.env.MONGO_URI;
-//mongoose.set('useUnifiedTopology', true);
 mongoose
   .connect(
     db,

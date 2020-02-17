@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+import {Schema, Document} from 'mongoose';
 import {Hours} from './hours.schema'
 
 export interface User extends mongoose.Document {
@@ -8,8 +9,9 @@ export interface User extends mongoose.Document {
     password: string;
     isAdmin: boolean;
     phone: string;
-    totalLoggedHours: number;
-    loggedHours: Array<Hours['_id']>;
+    totalHoursApproved: number;
+    approvedHours: Array<Hours['_id']>;
+    hoursPending: Array<Hours['_id']>;
 }
 
 const UserSchema: mongoose.Schema = new mongoose.Schema({
@@ -19,8 +21,9 @@ const UserSchema: mongoose.Schema = new mongoose.Schema({
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true},
     phone: {type: String},
-    totalLoggedHours: {type: Number},
-    loggedHours: [String]
+    totaHoursApproved: {type: Number},
+    approvedHours: [Schema.Types.ObjectId],
+    hoursPending: [Schema.Types.ObjectId],
 });
 
 const u : mongoose.Model<User> = mongoose.model('User', UserSchema, 'Users');

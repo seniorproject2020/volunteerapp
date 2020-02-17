@@ -4,7 +4,9 @@ import Hours from '../models/hours.schema';
 import Pending from '../models/pending.schema'
 
 const HoursController = {
-  async logHours(user: any, startDate: Date, endDate: Date):Promise<{success: boolean, res: any, err: any}> {
+  async logHours(user: any, startDate: Date, endDate: Date, event: string):Promise<{success: boolean, res: any, err: any}> {
+    console.log(user);
+
     if (!user) {
       return {success: false, res: undefined, err: {
         user: 'user not found',
@@ -20,7 +22,7 @@ const HoursController = {
         endDate: 'end time not entered',
       }};
     }
-    const hourCount = startDate.getHours() - endDate.getHours();
+    const hourCount = endDate.getHours() - startDate.getHours();
     console.log(hourCount);
     const hoursInfo = {
       userId: user._id,
@@ -28,9 +30,12 @@ const HoursController = {
       endTime: endDate,
       totalHours: hourCount,
       verified: false,
+      eventName: event,
     }
     const newHours = new Hours(hoursInfo);
     const resHours = await newHours.save();
+    console.log(resHours);
+    //this.toBeVerified(resHours);
     return {success: true, res: resHours, err: undefined};
   },
 
