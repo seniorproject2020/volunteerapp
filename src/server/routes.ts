@@ -27,9 +27,9 @@ router.post('/api/login', async (req, res) => {
     }
 })
 
-router.post('/loghours', passport.authenticate('jwt', {session: false}), async (req, res) => {
+router.post('/api/loghours', passport.authenticate('jwt', {session: false}), async (req, res) => {
     console.log(req.user);
-    const result = await HoursController.logHours(req.user, req.body.startDate, req.body.endDate);
+    const result = await HoursController.logHours(req.user, req.body.startDate, req.body.endDate, req.body.event);
     if(result.success){
         res.json(result);
     } else {

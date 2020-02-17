@@ -21,7 +21,6 @@ app.use(apiRouter);
 console.log(process.env.MONGO_URI);
 const db: string = process.env.MONGO_URI;
 
-mongoose.set('useUnifiedTopology', true);
 mongoose
   .connect(
     db,
