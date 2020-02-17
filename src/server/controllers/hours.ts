@@ -4,7 +4,7 @@ import Hours from '../models/hours.schema';
 import Pending from '../models/pending.schema'
 
 const HoursController = {
-  async logHours(user: any, startDate: Date, endDate: Date, event: String):Promise<{success: boolean, res: any, err: any}> {
+  async logHours(user: any, startDate: Date, endDate: Date, event: string):Promise<{success: boolean, res: any, err: any}> {
     console.log(user);
 
     if (!user) {
@@ -22,7 +22,7 @@ const HoursController = {
         endDate: 'end time not entered',
       }};
     }
-    const hourCount = startDate.getHours() - endDate.getHours();
+    const hourCount = endDate.getHours() - startDate.getHours();
     console.log(hourCount);
     const hoursInfo = {
       userId: user._id,
