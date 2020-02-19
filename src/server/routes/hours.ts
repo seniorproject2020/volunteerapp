@@ -5,12 +5,13 @@ import passport from 'passport';
 const router = express.Router();
 
 router.post('/loghours', passport.authenticate('jwt', {session: false}), async (req, res) => {
-  console.log(req.user);
-  const result = await HoursController.logHours(req.user, req.body.startDate, req.body.endDate);
+  console.log(req.body.startTime);
+  const result = await HoursController.logHours(req.user, new Date(req.body.startTime), new Date(req.body.endTime), req.body.eventName);
   if(result.success){
       res.json(result);
   } else {
-      res.status(404).json(result.err);
+    console.log(`err: ${JSON.stringify(result.err)}`);
+      res.status(400).json(result.err);
   }
 })
 

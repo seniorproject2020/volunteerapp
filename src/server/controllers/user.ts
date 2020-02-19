@@ -23,6 +23,7 @@ const UserController = {
     }
     const newUser = new User(userInfo);
     const resUser = await newUser.save();
+    resUser.password = null;
     return {success: true, user: resUser, err: undefined};
   },
 
@@ -39,6 +40,7 @@ const UserController = {
     const payload = {
       user: user,
     }
+    user.password = null;
 
     const token = jwt.sign(payload, process.env.secretOrKey,
       {

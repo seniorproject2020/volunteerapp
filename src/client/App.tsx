@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, HashRouter } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
@@ -37,7 +37,7 @@ class App extends React.Component{
 	render() {
     return (
       <Provider store={store}>
-        <BrowserRouter>
+        <HashRouter>
         <Navigation />
           <Container>
             <Route exact path="/" component={Landing} />
@@ -47,7 +47,7 @@ class App extends React.Component{
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
             </Switch>
           </Container>
-        </BrowserRouter>
+        </HashRouter>
       </Provider>
     );
   }

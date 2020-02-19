@@ -5,6 +5,7 @@ import { logoutUser } from "../../actions/authActions";
 
 import Calendar from "./Calendar";
 import { Container, Row, Col, Table } from "react-bootstrap";
+import LogHoursForm from "../hours/LogHoursForm";
 
 // TODO: Add styling and padding for dashboard page
 // TODO: Add dynamic table to pull from database
@@ -75,6 +76,11 @@ render() {
               <Calendar></Calendar>
             </div>
           </Col>
+        </Row>
+        <Row>
+          <div>
+            <LogHoursForm></LogHoursForm>
+          </div>
         </Row>
       </Container>
     );

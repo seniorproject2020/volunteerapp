@@ -10,7 +10,8 @@
     "allowJs": true,
     "lib":[
         "es2015", "dom"
-    ]
+    ],
+    "suppressExcessPropertyErrors": true,
   },
   "include": [
       "src/client/**/*"

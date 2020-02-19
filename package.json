@@ -19,6 +19,9 @@
   "author": "",
   "dependencies": {
     "@blueprintjs/core": "^3.23.1",
+    "@date-io/moment": "1.x",
+    "@material-ui/core": "^4.9.3",
+    "@material-ui/pickers": "^3.2.10",
     "@types/express": "^4.17.2",
     "@types/jsonwebtoken": "^8.3.7",
     "@types/mongoose": "^5.7.0",
@@ -37,6 +40,7 @@
     "is-empty": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^2.2.0",
+    "moment": "^2.24.0",
     "mongoose": "^5.8.11",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
