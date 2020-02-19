@@ -3,7 +3,6 @@ import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
-import classnames from "classnames";
 
 export interface RegisterState {
   email: string;
@@ -64,22 +63,22 @@ class Register extends Component<{}, RegisterState> {
         
         <form noValidate onSubmit={this.onSubmit}>
           <div>
+            <label htmlFor="email">Email</label>
             <input
               onChange={this.onChange} required
               value={this.state.email}
               id="email"
               type="email"
             />
-            <label htmlFor="email">Email</label>
           </div>
           <div>
+            <label htmlFor="password">Password</label>
             <input
               onChange={this.onChange} required
               value={this.state.password}
               id="password"
               type="password"
             />
-            <label htmlFor="password">Password</label>
           </div>
           <div>
             <button type="submit">
