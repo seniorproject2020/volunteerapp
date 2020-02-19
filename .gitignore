@@ -40,3 +40,5 @@ public/js
 # Redis data
 backend/redis-data/*
 !backend/redis-data/.gitkeep
+
+package-lock.json
