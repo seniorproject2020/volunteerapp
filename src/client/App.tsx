@@ -14,6 +14,8 @@ import Login from "./components/auth/Login"
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Dashboard from "./components/dashboard/Dashboard";
 import { Container } from 'react-bootstrap';
+import './../../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import './components/css/App.css'
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -40,9 +42,13 @@ class App extends React.Component{
         <HashRouter>
         <Navigation />
           <Container>
-            <Route exact path="/" component={Landing} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} />
+
+            <Switch>
+                <Route exact path="/" component={Landing} />
+                <Route exact path="/register" component={Register} />
+                <Route exact path="/login" component={Login} />
+            </Switch>
+           
             <Switch>
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
             </Switch>
