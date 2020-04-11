@@ -1,6 +1,5 @@
 {
   "editor.tabSize": 2,
-  "git.enabled": false,
   "editor.wordWrapColumn": 100,
   "eslint.alwaysShowStatus": true,
   "editor.formatOnSave": true,
