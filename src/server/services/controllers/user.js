@@ -1,6 +1,7 @@
 import * as jwt from 'jsonwebtoken';
 import User from '../../models/users';
 
+// TODO Update Error Messages
 const Controller = {
   async registerUser(email, password) {
     const user = await User.findOne({ email });

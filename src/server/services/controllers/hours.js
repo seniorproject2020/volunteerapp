@@ -1,9 +1,10 @@
-import Hours from '../../models/users';
+import Hours from '../../models/hours';
 import Pending from '../../models/pendinghours';
 
+// TODO Update error messages
+// TODO Better Error Handling
 const Controller = {
   async logHours(user, startDate, endDate, eventName, eventDescription) {
-
     if (!user) {
       return {
         success: false,
@@ -44,11 +45,10 @@ const Controller = {
       eventName,
       eventDescription,
     };
-
+    console.log(user);
     const newHours = new Hours(hoursInfo);
     const resHours = await newHours.save();
-    // this.toBeVerified(resHours);
-    return { success: true, res: resHours, err: undefined };
+    return this.toBeVerified(resHours);
   },
 
   async toBeVerified(resHours) {
@@ -62,17 +62,24 @@ const Controller = {
       };
     }
 
-    const pendingVerification = {
-      hoursPendingVerification: resHours.id,
-    };
+    const pendingHours = new Pending({
+      hours: resHours._id,
+    });
 
-    const hoursToVerify = new Pending(pendingVerification);
-    const pendingRes = await hoursToVerify.save();
-    return {
-      success: true,
-      res: pendingRes,
-      err: undefined
-    };
+    try {
+      await pendingHours.save();
+      return {
+        success: true,
+        res: resHours,
+        err: undefined
+      };
+    } catch (e) {
+      return {
+        success: false,
+        res: undefined,
+        err: e
+      };
+    }
   },
 
   async getHours(user) {

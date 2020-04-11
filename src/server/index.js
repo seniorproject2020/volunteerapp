@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
 import passport from 'passport';
+import path from 'path';
 import authJwt from './services/auth/jwt';
 import routes from './routes/routes';
 
@@ -15,6 +16,10 @@ app.use(bodyParser.json());
 app.use(passport.initialize());
 authJwt(passport);
 app.use('/api', routes);
+
+app.use((req, res) => {
+  res.sendFile(path.join(__dirname, '../public', 'index.html'));
+});
 
 const db = process.env.MONGO_URI;
 mongoose

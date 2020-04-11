@@ -2,11 +2,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
-  Container, Row, Col, Table
+  Container, Row, Table
 } from 'react-bootstrap';
 import { logoutUser } from '../../actions/authActions';
 
-// import Calendar from './Calendar'; TODO
+import Calendar from './Calendar';
 import LogHoursForm from '../hours/LogHoursForm';
 import ServerApi from '../../utils/ServerApi';
 
@@ -23,7 +23,7 @@ class Dashboard extends Component {
 
   async componentDidMount() {
     const hours = await ServerApi.getHours();
-    if (hours.length == 0) {
+    if (hours.length === 0) {
       this.setState({ loggedHours: [] });
       return;
     }
@@ -48,6 +48,9 @@ class Dashboard extends Component {
     const { loggedHours } = this.state;
     return (
       <Container>
+        <Row>
+          <Calendar />
+        </Row>
         <Row>
           <div>
             <LogHoursForm />

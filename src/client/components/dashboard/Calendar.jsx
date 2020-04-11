@@ -21,8 +21,8 @@ class Calendar extends Component {
         }}
         rootProps={{ 'data-testid': '2' }}
       />
-    )
+    );
   }
 }
 
-export default Calendar
+export default Calendar;
