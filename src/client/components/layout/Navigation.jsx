@@ -1,38 +1,51 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { logoutUser } from '../../actions/authActions';
 
 // TODO: Make register/login dynamic based on logged in status
 
-// class Navigation extends Component {
-//   render() {
-//     return (
-//       <Navbar bg="light" expand="lg">
-//         <Navbar.Brand as={NavLink} to="/">Volunteering</Navbar.Brand>
-//         <Navbar.Toggle aria-controls="basic-navbar-nav" />
-//         <Navbar.Collapse id="basic-navbar-nav">
-//           <Nav className="mr-auto">
-//             <Nav.Link as={NavLink} to="/register">Register</Nav.Link>
-//             <Nav.Link as={NavLink} to="/login">Login</Nav.Link>
-//           </Nav>
-//         </Navbar.Collapse>
-//       </Navbar>
-//     );
-//   }
-// }
+class Navigation extends Component {
+  loggedOutNavbar = () => (
+    <Nav className="mr-auto">
+      <Nav.Link as={NavLink} to="/register">Register</Nav.Link>
+      <Nav.Link as={NavLink} to="/login">Login</Nav.Link>
+    </Nav>
+  )
 
-function Navigation() {
-  return (
-    <Navbar bg="light" expand="lg">
-      <Navbar.Brand as={NavLink} to="/">Volunteering</Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="mr-auto">
-          <Nav.Link as={NavLink} to="/register">Register</Nav.Link>
-          <Nav.Link as={NavLink} to="/login">Login</Nav.Link>
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
-  );
+  loggedInNavbar = () => (
+    <Nav className="mr-auto">
+      <Nav.Link as={NavLink} to="/logout">Logout</Nav.Link>
+    </Nav>
+  )
+
+  getNavbar = (auth) => {
+    if (auth.isAuthenticated) {
+      return this.loggedInNavbar();
+    }
+    return this.loggedOutNavbar();
+  }
+
+  render() {
+    const { auth } = this.props;
+    return (
+      <Navbar bg="light" expand="lg">
+        <Navbar.Brand as={NavLink} to="/">Volunteering</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          {this.getNavbar(auth)}
+        </Navbar.Collapse>
+      </Navbar>
+    );
+  }
 }
-export default Navigation;
+
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  { logoutUser }
+)(Navigation);

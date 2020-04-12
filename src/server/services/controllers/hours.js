@@ -1,39 +1,17 @@
 import Hours from '../../models/hours';
-import Pending from '../../models/pendinghours';
+import PendingHours from '../../models/pendinghours';
+import { VerificationStatus } from '../../../common/constants';
 
 // TODO Update error messages
 // TODO Better Error Handling
+// TODO: better admin authorization to remove duplicate code
 const Controller = {
   async logHours(user, startDate, endDate, eventName, eventDescription) {
-    if (!user) {
-      return {
-        success: false,
-        res: undefined,
-        err: {
-          user: 'user not found',
-        }
-      };
-    }
+    if (!user) { throw new Error('User was not found.'); }
 
-    if (!startDate) {
-      return {
-        success: false,
-        res: undefined,
-        err: {
-          startDate: 'start time not entered',
-        }
-      };
-    }
+    if (!startDate) { throw new Error('Empty start time.'); }
 
-    if (!endDate) {
-      return {
-        success: false,
-        res: undefined,
-        err: {
-          endDate: 'end time not entered',
-        }
-      };
-    }
+    if (!endDate) { throw new Error('Empty end time.'); }
 
     const hourCount = Math.floor(Math.abs(startDate.getTime() - endDate.getTime()) / 36e5);
     const hoursInfo = {
@@ -41,70 +19,75 @@ const Controller = {
       startTime: startDate,
       endTime: endDate,
       totalHours: hourCount,
-      verified: false,
+      verifiedStatus: VerificationStatus.PENDING,
       eventName,
       eventDescription,
     };
-    console.log(user);
-    const newHours = new Hours(hoursInfo);
-    const resHours = await newHours.save();
-    return this.toBeVerified(resHours);
-  },
+    const hour = await (new Hours(hoursInfo)).save();
 
-  async toBeVerified(resHours) {
-    if (!resHours._id) {
-      return {
-        success: false,
-        res: undefined,
-        err: {
-          resHours: 'no ID found for logged hours',
-        }
-      };
-    }
-
-    const pendingHours = new Pending({
-      hours: resHours._id,
-    });
-
-    try {
-      await pendingHours.save();
-      return {
-        success: true,
-        res: resHours,
-        err: undefined
-      };
-    } catch (e) {
-      return {
-        success: false,
-        res: undefined,
-        err: e
-      };
-    }
+    await this.createPendingHour(user, hour);
+    return hour;
   },
 
   async getHours(user) {
-    if (!user) {
-      return {
-        success: false,
-        res: undefined,
-        err: {
-          resHours: 'user not found',
-        }
-      };
-    }
+    if (!user) { throw new Error('User was not found.'); }
 
     const userHours = await Hours.find({ userId: user.id });
-    if (!userHours) {
-      return {
-        success: false,
-        res: undefined,
-        err: {
-          resHours: 'no hours found for user',
-        }
-      };
+
+    if (!userHours) { throw new Error('Hours for user were not found.'); }
+
+    return userHours;
+  },
+
+  async createPendingHour(user, hour) {
+    if (!hour._id) {
+      throw new Error('Id was not found on hour.');
     }
 
-    return { success: true, res: userHours, err: undefined };
+    const pendingHour = new PendingHours({
+      _id: hour._id,
+      volunteerName: `${user.firstName} ${user.lastName}`,
+      eventName: hour.eventName,
+      eventDescription: hour.eventDescription,
+      startTime: hour.startTime,
+      endTime: hour.endTime,
+    });
+
+    await pendingHour.save();
+  },
+
+  async handleAccept(user, id) {
+    if (!user) { throw new Error('User was not found.'); }
+
+    if (!user.isAdmin) { throw new Error('User is not authroized for this function.'); }
+
+    const update = {
+      verifiedStatus: VerificationStatus.ACCEPTED,
+      verifiedBy: `${user.firstName} ${user.lastName}`,
+    };
+    await Hours.findByIdAndUpdate(id, update);
+    await PendingHours.findByIdAndDelete(id);
+  },
+
+  async handleReject(user, id) {
+    if (!user) { throw new Error('User was not found.'); }
+
+    if (!user.isAdmin) { throw new Error('User is not authroized for this function.'); }
+
+    const update = {
+      verifiedStatus: VerificationStatus.REJECTED,
+      verifiedBy: `${user.firstName} ${user.lastName}`,
+    };
+    await Hours.findByIdAndUpdate(id, update);
+    await PendingHours.findByIdAndDelete(id);
+  },
+
+  async getPendingHours(user) {
+    if (!user) { throw new Error('User was not found.'); }
+
+    if (!user.isAdmin) { throw new Error('User is not authroized for this function.'); }
+
+    return PendingHours.find();
   }
 };
 

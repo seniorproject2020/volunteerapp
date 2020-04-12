@@ -44,7 +44,15 @@ export default class LogHoursForm extends Component {
     const {
       startTime, endTime, eventName, eventDescription
     } = this.state;
-    ServerApi.postHours(startTime.toString(), endTime.toString(), eventName, eventDescription);
+    const { addHourToTable } = this.props;
+    ServerApi.postHours(
+      startTime.toString(),
+      endTime.toString(),
+      eventName,
+      eventDescription,
+      addHourToTable
+    );
+
     this.handleClose();
   }
 

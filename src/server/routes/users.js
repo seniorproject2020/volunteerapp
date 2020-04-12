@@ -4,23 +4,23 @@ import UserController from '../services/controllers/user';
 
 const router = express.Router();
 // TODO Get below logic out of here.
+// TODO: Replace success logic with try-catch
 
 router.post('/register', async (req, res) => {
-  const result = await UserController.registerUser(req.body.email, req.body.password);
-  if (result.success) {
-    return res.json(result);
+  try {
+    await UserController.registerUser(req.body.email, req.body.password);
+    res.status(200).end();
+  } catch (err) {
+    res.status(400).json(err.message);
   }
-  console.log(result.err);
-  return res.status(400).json(result.err);
 });
 
 router.post('/login', async (req, res) => {
-  const result = await UserController.loginUser(req.body.email, req.body.password);
-  if (result.success) {
+  try {
+    const result = await UserController.loginUser(req.body.email, req.body.password);
     res.json(result);
-  } else {
-    console.log(result.err);
-    res.status(400).json(result.err);
+  } catch (err) {
+    res.status(400).json(err.message);
   }
 });
 
@@ -28,7 +28,7 @@ router.get('/currentUser', passport.authenticate('jwt', { session: false }), (re
   if (req.user) {
     res.json(req.user);
   } else {
-    res.json({ msg: 'fail' });
+    res.status(400).json('fail');
   }
 });
 

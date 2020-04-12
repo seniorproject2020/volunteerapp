@@ -5,10 +5,10 @@ const HoursSchema = new Schema({
   startTime: { type: Date, required: true },
   endTime: { type: Date, required: true },
   totalHours: { type: Number, required: true },
-  verified: { type: Boolean, required: true },
+  verifiedStatus: { type: Number, required: true },
   eventName: { type: String, required: true },
   eventDescription: { type: String },
-  verifiedBy: { type: Schema.Types.ObjectId },
+  verifiedBy: { type: String },
 });
 
 export default mongoose.model('Hours', HoursSchema, 'Hours');

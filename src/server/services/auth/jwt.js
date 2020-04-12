@@ -6,6 +6,7 @@ const opts = {
   secretOrKey: 'secret',
 };
 
+// TODO Use Mongoose lean here
 const init = (passport) => {
   passport.use(
     new Strategy(opts, (jwtPayload, done) => {
