@@ -7,13 +7,7 @@ const Controller = {
     const user = await User.findOne({ email });
 
     if (user) {
-      return {
-        success: false,
-        user: undefined,
-        err: {
-          email: 'Email already exists.',
-        }
-      };
+      throw new Error('Email already exists.');
     }
 
     const userInfo = {
@@ -28,20 +22,19 @@ const Controller = {
     };
 
     const newUser = new User(userInfo);
-    const resUser = await newUser.save();
-    resUser.password = null;
-    return { success: true, user: resUser, err: undefined };
+    await newUser.save();
   },
 
   async loginUser(email, password) {
+    // TODO add mongoose lean
     const user = await User.findOne({ email });
 
     if (!user) {
-      return { success: false, token: '', err: { emailnotfound: 'Email not found.' } };
+      throw new Error('Email not found.');
     }
 
     if (password !== user.password) {
-      return { success: false, token: '', err: undefined };
+      throw new Error('Invalid Password');
     }
 
     const payload = { user };
@@ -55,11 +48,7 @@ const Controller = {
       }
     );
 
-    return {
-      success: true,
-      token: `JWT ${token}`,
-      err: undefined
-    };
+    return { token: `JWT ${token}` };
   }
 };
 

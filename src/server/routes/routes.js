@@ -7,4 +7,5 @@ const router = express.Router();
 router.use('/users', user);
 
 router.use('/hours', hours);
+
 export default router;
