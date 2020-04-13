@@ -42,6 +42,8 @@ class Register extends Component {
     const newUser = {
       email: this.state.email,
       password: this.state.password,
+      firstName: this.state.firstName,
+      lastName: this.state.lastName
     };
 
     console.log(newUser);
@@ -50,43 +52,60 @@ class Register extends Component {
 
   render() {
     return (
-      <div>
-        <div>
-          Register Page
-          <p>
-            Already have an account?
-            {' '}
-            <Link to="/login">Log in</Link>
-          </p>
+      <div className="wrapper">
+        <div className="inner-wrapper">
+          <form noValidate onSubmit={this.onSubmit}>
+            <h3 className="text-center">Register</h3>
+            <div className="form-group">
+              <label htmlFor="text">First Name</label>
+              <input
+                onChange={this.onChange} required
+                value={this.state.firstName}
+                id="firstName"
+                type="text"
+                className="form-control"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="text">Last Name</label>
+              <input
+                onChange={this.onChange} required
+                value={this.state.lastName}
+                id="lastName"
+                type="text"
+                className="form-control"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <input
+                onChange={this.onChange} required
+                value={this.state.email}
+                id="email"
+                type="email"
+                className="form-control"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <input
+                onChange={this.onChange} required
+                value={this.state.password}
+                id="password"
+                type="password"
+                className="form-control"
+              />
+            </div>
+            <div>
+              <button type="submit" className="btn btn-primary btn-block">
+                Sign up
+              </button>
+              <p className="links">
+                Already have an account? <Link to="/login">Log in</Link>
+              </p>
+            </div>
+          </form>
         </div>
-
-        <form noValidate onSubmit={this.onSubmit}>
-          <div>
-            <label htmlFor="email">Email</label>
-            <input
-              onChange={this.onChange}
-              required
-              value={this.state.email}
-              id="email"
-              type="email"
-            />
-          </div>
-          <div>
-            <label htmlFor="password">Password</label>
-            <input
-              onChange={this.onChange}
-              required
-              value={this.state.password}
-              id="password"
-              type="password"
-            />
-          </div>
-          <div>
-            <button type="submit">
-              Sign up
-            </button>
-          </div>
-        </form>
       </div>
     );
   }

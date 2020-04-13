@@ -51,44 +51,42 @@ class Login extends Component {
   };
 
   render() {
+    const { errors } = this.state;
     return (
-      <div>
-        <div>
-          Login Page
-          <p>
-            Don't have an account?
-            {' '}
-            <Link to="/register">Register</Link>
-          </p>
+      <div className="wrapper">
+        <div className="inner-wrapper">
+          <form noValidate onSubmit={this.onSubmit}>
+            <h3 className="text-center">Sign in</h3>
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <input
+                onChange={this.onChange} required
+                value={this.state.email}
+                id="email"
+                type="email"
+                className="form-control"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="password">Password</label>
+              <input
+                onChange={this.onChange} required
+                value={this.state.password}
+                id="password"
+                type="password"
+                className="form-control"
+              />
+            </div>
+            <div>
+              <button type="submit" className="btn btn-primary btn-block">
+                Log in
+              </button>
+            </div>
+            <p className="links">
+              Don't have an account? <Link to="/register">Register</Link>
+            </p>
+          </form>
         </div>
-
-        <form noValidate onSubmit={this.onSubmit}>
-          <div>
-            <input
-              onChange={this.onChange}
-              required
-              value={this.state.email}
-              id="email"
-              type="email"
-            />
-            <label htmlFor="email">Email</label>
-          </div>
-          <div>
-            <input
-              onChange={this.onChange}
-              required
-              value={this.state.password}
-              id="password"
-              type="password"
-            />
-            <label htmlFor="password">Password</label>
-          </div>
-          <div>
-            <button type="submit">
-              Log in
-            </button>
-          </div>
-        </form>
       </div>
     );
   }
