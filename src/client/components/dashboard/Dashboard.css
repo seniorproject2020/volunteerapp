@@ -1,0 +1,42 @@
+.table tr:nth-child(even){
+  background-color: #d9e2f3;
+}
+
+.table th{
+  background-color: #2e74b5;
+  color: white;
+}
+
+.name{
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.description{
+  font-style: italic;
+}
+
+.buttons{
+  white-space: nowrap;
+}
+
+.alert{
+  margin-top: 3rem;
+}
+
+.hourcount{
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+  margin: 3% 0;
+  min-height: 200px;
+  justify-content: space-around;
+}

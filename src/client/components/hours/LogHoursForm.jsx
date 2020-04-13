@@ -74,17 +74,6 @@ export default class LogHoursForm extends Component {
                 <Form.Label>Date </Form.Label>
                   <DatePicker value={selectedDate} onChange={this.handleDateChange} />
               </Form.Group> */}
-
-                <Form.Group controlId="startTime">
-                  <Form.Label>Start Time </Form.Label>
-                  <DateTimePicker value={startTime} onChange={this.handleStartTimeChange} />
-                </Form.Group>
-
-                <Form.Group controlId="endTime">
-                  <Form.Label>End Time </Form.Label>
-                  <DateTimePicker value={endTime} onChange={this.handleEndTimeChange} />
-                </Form.Group>
-
                 <Form.Group controlId="eventName">
                   <Form.Label>Event Name </Form.Label>
                   <Form.Control value={eventName} type="text" onChange={this.handleEventNameChange} />
@@ -96,6 +85,16 @@ export default class LogHoursForm extends Component {
                     value={eventDescription}
                     onChange={this.handleEventDescriptionChange}
                   />
+                </Form.Group>
+
+                <Form.Group controlId="startTime">
+                  <Form.Label>Start Time </Form.Label>
+                  <DateTimePicker value={startTime} onChange={this.handleStartTimeChange} />
+                </Form.Group>
+
+                <Form.Group controlId="endTime">
+                  <Form.Label>End Time </Form.Label>
+                  <DateTimePicker value={endTime} onChange={this.handleEndTimeChange} />
                 </Form.Group>
 
               </MuiPickersUtilsProvider>

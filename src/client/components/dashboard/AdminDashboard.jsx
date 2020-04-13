@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
-  Container, Table, Button
+  Alert, Table, Button
 } from 'react-bootstrap';
+import { ExclamationTriangleFill } from 'react-bootstrap-icons'
 import { logoutUser } from '../../actions/authActions';
 import ServerApi from '../../utils/ServerApi';
-
+import './Dashboard'
 
 class AdminDashboard extends Component {
   constructor(props) {
@@ -56,16 +57,16 @@ class AdminDashboard extends Component {
       <tr key={pendingHour._id}>
         <td>{pendingHour.user}</td>
         <td>
-          <b>{`${pendingHour.eventName}\n`}</b>
-          {`${pendingHour.eventDescription}`}
+          <div className="name">{`${pendingHour.eventName}\n`}</div>
+          <div className="description">{`${pendingHour.eventDescription}`}</div>
         </td>
         <td>{(new Date(pendingHour.startTime)).toString()}</td>
         <td>{(new Date(pendingHour.endTime)).toString()}</td>
         <td>
-          <Button variant="primary" onClick={() => this.acceptPendingHour(pendingHour._id, callback)}>Accept</Button>
+          <Button variant="success" onClick={() => this.acceptPendingHour(pendingHour._id, callback)}>Accept</Button>
         </td>
         <td>
-          <Button variant="primary" onClick={() => this.rejectPendingHours(pendingHour._id, callback)}>Reject</Button>
+          <Button variant="danger" onClick={() => this.rejectPendingHours(pendingHour._id, callback)}>Reject</Button>
         </td>
       </tr>
     );
@@ -74,25 +75,42 @@ class AdminDashboard extends Component {
   render() {
     const { rows } = this.state;
     return (
-      <Container>
-        <Table striped bordered hover>
-          <thead>
-            <tr>
-              <th>User Name</th>
-              <th>Event</th>
-              <th>Start Time</th>
-              <th>End Time</th>
-              <th>Accept</th>
-              <th>Reject</th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              rows
-            }
-          </tbody>
-        </Table>
-      </Container>
+      <div>
+        {rows.length == 0 &&
+          <Alert className="alert" variant="success">
+            No new submissions
+        </Alert>
+        }
+        {rows.length == 1 &&
+          <Alert className="alert" variant="danger">
+            <ExclamationTriangleFill color="#800000" size="25" />   {rows.length} submission needs attention
+        </Alert>
+        }
+        {rows.length > 1 &&
+          <Alert className="alert" variant="danger">
+            <ExclamationTriangleFill color="#800000" size="25" />   {rows.length} submissions need attention
+        </Alert>
+        }
+        <div>
+          <Table responsive hover className="table">
+            <thead>
+              <tr>
+                <th>User</th>
+                <th>Event</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Actions</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                rows
+              }
+            </tbody>
+          </Table>
+        </div>
+      </div>
     );
   }
 }
