@@ -1552,6 +1552,11 @@ boolbase@~1.0.0:
   resolved "https://registry.yarnpkg.com/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
   integrity sha1-aN/1++YMUes3cl6p4+0xDcwed24=
 
+bootstrap-icons@^1.0.0-alpha3:
+  version "1.0.0-alpha3"
+  resolved "https://registry.yarnpkg.com/bootstrap-icons/-/bootstrap-icons-1.0.0-alpha3.tgz#413171e88b79315e712e6ab65601f64b1735d566"
+  integrity sha512-UO++43jb/qlWVsC31WkHOjFsTihJkSz0wngnUS+P1ImcCMTqDJqDHySld+hpkzxi+q6fL8iom7nfT3ApAxZ6cQ==
+
 boxen@^1.2.1:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/boxen/-/boxen-1.3.0.tgz#55c6c39a8ba58d9c61ad22cd877532deb665a20b"
@@ -5774,6 +5779,14 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.2.7:
     ini "~1.3.0"
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
+
+react-bootstrap-icons@^1.0.1-alpha3:
+  version "1.0.1-alpha3"
+  resolved "https://registry.yarnpkg.com/react-bootstrap-icons/-/react-bootstrap-icons-1.0.1-alpha3.tgz#796e8c6f38bcd01b721ff98f04452b939630c093"
+  integrity sha512-A8ZEUs4t/U1buv2mnEjo+xmo1jPodx3FotT+vLZmcr7YT+qtNNHaWpiEBWrFDuOEFuu0jUi/4tyhkfYM1LhQ+w==
+  dependencies:
+    bootstrap-icons "^1.0.0-alpha3"
+    prop-types "^15.7.2"
 
 react-bootstrap-table@^4.3.1:
   version "4.3.1"

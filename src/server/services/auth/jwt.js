@@ -14,7 +14,6 @@ const init = (passport) => {
         .then((user) => {
           if (user) {
             // TODO See if this can be rewritten to remove password to the passed user. Possibibly copy fields?
-            user.password = null;
             return done(null, user);
           }
           return done(null, false);

@@ -17,7 +17,7 @@ const Controller = {
       phone: '',
       firstName: '',
       lastName: '',
-      totalLoggedHours: 0,
+      totalHoursApproved: 0,
       loggedHours: [],
     };
 
@@ -49,6 +49,12 @@ const Controller = {
     );
 
     return { token: `JWT ${token}` };
+  },
+
+  async addApprovedHours(userId, amount) {
+    const user = await User.findById(userId);
+    user.totalHoursApproved += amount;
+    user.save();
   }
 };
 

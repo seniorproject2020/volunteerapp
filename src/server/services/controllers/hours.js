@@ -1,5 +1,6 @@
 import Hours from '../../models/hours';
 import PendingHours from '../../models/pendinghours';
+import User from './user';
 import { VerificationStatus } from '../../../common/constants';
 
 // TODO Update error messages
@@ -65,7 +66,9 @@ const Controller = {
       verifiedStatus: VerificationStatus.ACCEPTED,
       verifiedBy: `${user.firstName} ${user.lastName}`,
     };
-    await Hours.findByIdAndUpdate(id, update);
+    const hour = await Hours.findByIdAndUpdate(id, update);
+    console.log(hour.totalHours);
+    User.addApprovedHours(hour.userId, hour.totalHours);
     await PendingHours.findByIdAndDelete(id);
   },
 

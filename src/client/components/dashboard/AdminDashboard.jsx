@@ -43,8 +43,8 @@ class AdminDashboard extends Component {
   removeRow = (key) => {
     this.setState((state) => {
       const rows = [...state.rows];
-      for (let i = 0; i < rows; i += 1) {
-        if (rows[i]._id === key) {
+      for (let i = 0; i < rows.length; i += 1) {
+        if (rows[i].key === key) {
           rows.splice(i, 1);
         }
       }

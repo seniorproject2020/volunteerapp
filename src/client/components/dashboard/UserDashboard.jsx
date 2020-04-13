@@ -16,6 +16,15 @@ import './Dashboard.css'
 // TODO: Add dynamic table to pull from database
 
 class Dashboard extends Component {
+  static getStatus(status) {
+    switch (status) {
+      case VerificationStatus.ACCEPTED: return <div className="buttons"><Check color="green" size="25" /> Accepted </div>;
+      case VerificationStatus.REJECTED: return <div className="buttons"><X color="red" size="25" /> Rejected</div>;
+      case VerificationStatus.PENDING: return <div className="buttons"><Stopwatch color="orange" size="25" /> Pending</div>;
+      default: return null;
+    }
+  }
+
   static createRow(hour) {
     return (
       <tr key={hour._id}>
@@ -26,17 +35,8 @@ class Dashboard extends Component {
         <td>{(new Date(hour.startTime)).toString()}</td>
         <td>{(new Date(hour.endTime)).toString()}</td>
         <td>
-          {VerificationStatus.getMessage(hour.verifiedStatus) == "Accepted" &&
-            <div className="buttons"><Check color="green" size="25" /> Accepted </div>
-          }
-          {VerificationStatus.getMessage(hour.verifiedStatus) == "Rejected" &&
-            <div className="buttons"><X color="red" size="25" /> Rejected</div>
-          }
-          {VerificationStatus.getMessage(hour.verifiedStatus) == "Pending" &&
-            <div className="buttons"><Stopwatch color="orange" size="25" /> Pending</div>
-          }
+          {Dashboard.getStatus(hour.verifiedStatus)}
         </td>
-        {/* <td>{VerificationStatus.getMessage(hour.verifiedStatus)}</td> */}
       </tr>
     );
   }
@@ -98,7 +98,7 @@ class Dashboard extends Component {
           </tbody>
         </Table>
         <p className="hourcount">
-          TOTAL APPROVED HOURS:
+          TOTAL APPROVED HOURS: {this.props.auth.user.totalApprovedHours}
         </p>
         <div>
           <LogHoursForm addHourToTable={this.addHourToTable} />
