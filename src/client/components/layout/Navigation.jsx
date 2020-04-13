@@ -30,7 +30,7 @@ class Navigation extends Component {
   render() {
     const { auth } = this.props;
     return (
-      <Navbar bg="light" expand="lg">
+      <Navbar bg="primary" variant="dark" expand="lg">
         <Navbar.Brand as={NavLink} to="/">Volunteering</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
