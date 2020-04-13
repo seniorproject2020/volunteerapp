@@ -3,7 +3,7 @@ import User from '../../models/users';
 
 // TODO Update Error Messages
 const Controller = {
-  async registerUser(email, password) {
+  async registerUser(email, password, firstName, lastName) {
     const user = await User.findOne({ email });
 
     if (user) {
@@ -15,8 +15,8 @@ const Controller = {
       password,
       isAdmin: false,
       phone: '',
-      firstName: '',
-      lastName: '',
+      firstName,
+      lastName,
       totalLoggedHours: 0,
       loggedHours: [],
     };
