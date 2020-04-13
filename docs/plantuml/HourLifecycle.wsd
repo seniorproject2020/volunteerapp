@@ -1,0 +1,19 @@
+@startuml
+actor Volunteer
+control Server
+database Hours
+database PendingHours
+collections Users
+
+Volunteer -> Server : Log Hours
+activate Server
+
+Server -> Hours: Create new Hour
+activate Hours
+return newHour with _id
+
+Server -> PendingHours: add newHour._id
+
+Server -> Users: add newHour._id to Volunteer.pending
+return success
+@enduml

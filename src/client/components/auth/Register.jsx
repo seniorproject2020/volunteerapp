@@ -10,6 +10,8 @@ class Register extends Component {
     this.state = {
       email: '',
       password: '',
+      firstName: '',
+      lastName: '',
     };
   }
 
