@@ -11,7 +11,7 @@
     "dev:client": "webpack --watch --config webpack.config.client.js --mode development --devtool inline-source-map",
     "dev:server": "concurrently  \"yarn server:build\" \"yarn server:watch\"",
     "client:dev-server": "webpack-dev-server --config webpack.config.client.js --mode development --devtool inline-source-map --hot",
-    "start": "yarn build && node ./dist/server.js",
+    "start": "node ./dist/server.js",
     "server:watch": "nodemon --inspect=\"9229\" \"./dist/server.js\" --watch \"./dist\" ",
     "server:build": "webpack --watch --config webpack.config.server.js"
   },
