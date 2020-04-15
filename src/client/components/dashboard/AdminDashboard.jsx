@@ -55,7 +55,7 @@ class AdminDashboard extends Component {
   createRow(pendingHour, callback) {
     return (
       <tr key={pendingHour._id}>
-        <td>{pendingHour.user}</td>
+        <td>{pendingHour.volunteerName}</td>
         <td>
           <div className="name">{`${pendingHour.eventName}\n`}</div>
           <div className="description">{`${pendingHour.eventDescription}`}</div>
