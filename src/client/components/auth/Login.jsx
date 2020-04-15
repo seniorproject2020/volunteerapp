@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -82,7 +81,7 @@ class Login extends Component {
                 Log in
               </button>
             </div>
-            <p className="links">
+            <p className="links text-center">
               Don't have an account? <Link to="/register">Register</Link>
             </p>
           </form>

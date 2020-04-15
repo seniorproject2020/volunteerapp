@@ -99,7 +99,7 @@ class Register extends Component {
               <button type="submit" className="btn btn-primary btn-block">
                 Sign up
               </button>
-              <p className="links">
+              <p className="links text-center">
                 Already have an account? <Link to="/login">Log in</Link>
               </p>
             </div>
